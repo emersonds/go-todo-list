@@ -29,11 +29,10 @@ func main() {
 		switch command := scanner.Text(); command {
 		case "add":
 			addCommand(scanner, &tasks)
+		case "list":
+			viewList(&tasks)
 		}
-		for index, task := range tasks {
-			fmt.Println(index, task)
-		}
-		fmt.Println("Tasks:", tasks)
+		// fmt.Println("Tasks:", tasks)
 	}
 }
 
@@ -41,7 +40,19 @@ func main() {
 func addCommand(scanner *bufio.Scanner, list *[]ToDo) {
 	fmt.Println("Create a task to add to your todo list...")
 	scanner.Scan()
-	input := scanner.Text()
-	fmt.Println(input)
-	*list = append(*list, ToDo{IsComplete: false, Name: input})
+	// input := scanner.Text()
+	// fmt.Println(input)
+	*list = append(*list, ToDo{IsComplete: false, Name: scanner.Text()})
+}
+
+func viewList(list *[]ToDo) {
+	// Display each task in the list
+	for index, task := range *list {
+		complete := "Complete"
+		if !task.IsComplete {
+			complete = "Not " + complete
+		}
+
+		fmt.Printf("%d. %s | %s\n", index, task.Name, complete)
+	}
 }
