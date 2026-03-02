@@ -17,13 +17,15 @@ func (t *ToDo) ChangeCompletion(completeStatus bool) {
 }
 
 func main() {
+	fmt.Printf("Welcome to Dylan's Golang To-Do List!\nType \"add\", \"list\", \"complete\", or \"remove\" to begin using the To-Do list.\nPress Ctrl+C to exit the program.\n")
+
 	tasks := []ToDo{}
 	// Used to get user input with spaces
 	scanner := bufio.NewScanner(os.Stdin)
 
 	// Main program loop
 	for {
-		fmt.Println("Commands: add, list, complete")
+		fmt.Println("Commands: add, list, complete, remove")
 		scanner.Scan()
 
 		switch command := scanner.Text(); command {
@@ -31,6 +33,8 @@ func main() {
 			addCommand(scanner, &tasks)
 		case "list":
 			viewList(&tasks)
+		case "remove":
+			// removeCommand(scanner, tasks)
 		}
 		// fmt.Println("Tasks:", tasks)
 	}
@@ -56,3 +60,18 @@ func viewList(list *[]ToDo) {
 		fmt.Printf("%d. %s | %s\n", index, task.Name, complete)
 	}
 }
+
+/*
+func removeCommand(scanner *bufio.Scanner, list *[]ToDo) {
+	fmt.Println("What task would you like to remove? Please type the index.")
+	scanner.Scan()
+
+	if index, err := strconv.Atoi(scanner.Text()); index >= 0 {
+		fmt.Println(index, *list[9], list)
+		*list = slices.Delete(*list, index, index+1)
+		fmt.Println(*list)
+	} else {
+		fmt.Println(err)
+	}
+}
+*/
