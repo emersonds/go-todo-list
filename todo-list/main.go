@@ -26,15 +26,17 @@ func main() {
 
 		fmt.Println("TODO:", todo1.Name, "Completed?", todo1.IsComplete)
 	*/
-	tasks := make([]ToDo, 10)
-
+	tasks := []ToDo{}
 	// Used to get user input with spaces
 	scanner := bufio.NewScanner(os.Stdin)
 
-	fmt.Println("Create a task to add to your todo list...")
-	scanner.Scan()
-	input := scanner.Text()
-	tasks = append(tasks, ToDo{IsComplete: false, Name: input})
+	for {
+		fmt.Println("Create a task to add to your todo list...")
+		scanner.Scan()
+		input := scanner.Text()
+		fmt.Println(input)
+		tasks = append(tasks, ToDo{IsComplete: false, Name: input})
 
-	fmt.Println("Task:", tasks[0].Name, "Completed:", tasks[0].IsComplete)
+		fmt.Println("Tasks:", tasks)
+	}
 }
