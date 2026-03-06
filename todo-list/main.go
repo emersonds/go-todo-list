@@ -35,6 +35,8 @@ func main() {
 			viewList(&tasks)
 		case "remove":
 			// removeCommand(scanner, tasks)
+		case "complete":
+			completeTask(tasks)
 		}
 		// fmt.Println("Tasks:", tasks)
 	}
@@ -76,12 +78,14 @@ func removeCommand(scanner *bufio.Scanner, list *[]ToDo) {
 }
 */
 
-func completeTask (list []ToDo) {
-	fmt.Printf("Which task would you like to complete? Please provide an index (1-%d).\n", len(list))
-	
-	if input, err := fmt.Scanln(), err; input <= len(list) {
+func completeTask(list []ToDo) {
+	fmt.Printf("Which task would you like to complete? Please provide an index (0-%d).\n", len(list)-1)
+
+	var input int
+	fmt.Scanln(&input)
+
+	if input < len(list) {
+		fmt.Println("Completing task", input)
 		list[input].ChangeCompletion(true)
-	} else {
-		fmt.Println("Error completing task:", err)
 	}
 }
