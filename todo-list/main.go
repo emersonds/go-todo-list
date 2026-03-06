@@ -75,3 +75,13 @@ func removeCommand(scanner *bufio.Scanner, list *[]ToDo) {
 	}
 }
 */
+
+func completeTask (list []ToDo) {
+	fmt.Printf("Which task would you like to complete? Please provide an index (1-%d).\n", len(list))
+	
+	if input, err := fmt.Scanln(), err; input <= len(list) {
+		list[input].ChangeCompletion(true)
+	} else {
+		fmt.Println("Error completing task:", err)
+	}
+}
