@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"slices"
 )
 
 type ToDo struct {
@@ -34,7 +35,7 @@ func main() {
 		case "list":
 			viewList(&tasks)
 		case "remove":
-			// removeCommand(scanner, tasks)
+			removeCommand(&tasks)
 		case "complete":
 			completeTask(tasks)
 		}
@@ -63,20 +64,16 @@ func viewList(list *[]ToDo) {
 	}
 }
 
-/*
-func removeCommand(scanner *bufio.Scanner, list *[]ToDo) {
-	fmt.Println("What task would you like to remove? Please type the index.")
-	scanner.Scan()
+func removeCommand(list *[]ToDo) {
+	fmt.Printf("Which task would you like to complete? Please provide an index (0-%d).\n", len(*list)-1)
 
-	if index, err := strconv.Atoi(scanner.Text()); index >= 0 {
-		fmt.Println(index, *list[9], list)
-		*list = slices.Delete(*list, index, index+1)
-		fmt.Println(*list)
-	} else {
-		fmt.Println(err)
-	}
+	var input int
+	fmt.Scanln(&input)
+
+	newSlice := *list
+	newSlice = slices.Delete(newSlice, input, input+1)
+	*list = newSlice
 }
-*/
 
 func completeTask(list []ToDo) {
 	fmt.Printf("Which task would you like to complete? Please provide an index (0-%d).\n", len(list)-1)
