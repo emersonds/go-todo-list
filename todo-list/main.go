@@ -65,7 +65,7 @@ func viewList(list *[]ToDo) {
 }
 
 func removeCommand(list *[]ToDo) {
-	fmt.Printf("Which task would you like to complete? Please provide an index (0-%d).\n", len(*list)-1)
+	fmt.Printf("Which task would you like to remove? Please provide an index (0-%d).\n", len(*list)-1)
 
 	var input int
 	fmt.Scanln(&input)
